@@ -3,7 +3,7 @@
 ################################################################################################
 #
 # Script: Metrics
-# By: john eckhardt
+# By: John Vossler
 # Dated: 12.26.2006
 # Purpose: To extract trending metrics. Defined below.
 #

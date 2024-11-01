@@ -4,7 +4,7 @@
 
 =item *
 
-C<installed into: /home/jeckhardt/lib/perl/site_perl>
+C<installed into: /home/jvossler/lib/perl/site_perl>
 
 =item *
 
@@ -26,7 +26,7 @@ C<EXE_FILES: >
 
 =item *
 
-C<installed into: /home/jeckhardt/lib/perl/site_perl>
+C<installed into: /home/jvossler/lib/perl/site_perl>
 
 =item *
 
@@ -48,7 +48,7 @@ C<EXE_FILES: >
 
 =item *
 
-C<installed into: /home/jeckhardt/lib/perl/site_perl>
+C<installed into: /home/jvossler/lib/perl/site_perl>
 
 =item *
 
