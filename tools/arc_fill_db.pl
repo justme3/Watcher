@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # Script: arc_dump_ms.pl
-# By: jeckhardt
+# By: jvossler
 # Dated: 28 Jan 2009
 # Purpose: tool to populate an sqlite3 db at /tmp/arc.cust.data.db
 
@@ -11,7 +11,7 @@
 #				 total INTEGER, five INTEGER, ten INTEGER, fifteen INTEGER, twenty INTEGER, twentyfive INTEGER);"
 
 
-our $author		= 'jeckhardt';
+our $author		= 'jvossler';
 our $author_email	= 'John_Vossler\@McAfee.com';
 our $last_update	= '01-28-2009';
 our $script_name	= 'arc_fill_db.pl';
