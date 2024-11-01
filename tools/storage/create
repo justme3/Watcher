@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -x
+
+/usr/bin/initdb -D /home/data -E UNICODE --lc-collate=C --lc-ctype=C -U postgres 
+
+ln -s /home/data /var/lib/pgsql/data
+
+/etc/init.d/postgresql start
+
+/usr/bin/createdb -T template1 -E UNICODE -h localhost -U postgres watcher
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table ba_storage ( 
+
+epochtime timestamp with time zone not null,
+baname text not null,
+ba_ip inet not null,
+fsname text not null,
+percent_used int not null,
+percent_snapshot int not null,
+
+primary key (epochtime,baname,fsname))"
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table ba_lastrun ( 
+
+epochtime timestamp with time zone not null, 
+
+primary key (epochtime))"
+
+
+
+03 01 * * * /usr/local/bin/opsadmin/watcher/watcher_storage.pl 1>>/var/log/mxl/watcher/ba.log 2>>/var/log/mxl/watcher/ba.log
+
+
+
+/etc/logrotate.d/watcher-ba
+
+/var/log/mxl/watcher/ba.log {
+    copytruncate
+    weekly
+    rotate 52
+    compress
+    notifempty
+}
+

@@ -1,0 +1,6 @@
+<configuration>
+	<watcher_archive>
+		<pair ip="10.2.107.1"></pair>
+		<region id="0"></region>
+	</watcher_archive>
+</configuration>

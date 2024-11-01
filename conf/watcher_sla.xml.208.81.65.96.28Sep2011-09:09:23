@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<configuration>
+	<tesla>
+		<source ip="10.1.107.2"></source>
+	</tesla>
+	<service>
+		<name		totals="mail.inbound10.apac.mxlogic.net"></name>
+		<name		totals="mxlogic.com.web01.apac.mxlogic.net"></name>
+	</service>
+</configuration>

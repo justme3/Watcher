@@ -1,0 +1,27 @@
+############################
+### watcher table Checks ###
+############################
+
+# 'check_watcher_lastrun.pl' command definition
+define command {
+   command_name   check_watcher_lastrun
+   command_line   /usr/local/nagios/libexec/check_watcher_lastrun.pl
+   }
+
+#######################
+### Postgres Checks ###
+#######################
+
+# 'check_postgres' command definition
+define command {
+   command_name   check_postgres
+   command_line   /usr/local/nagios/libexec/check_postgres $HOSTADDRESS$ $ARG1$
+   }
+
+# 'check_postgres_watcher' command definition
+define command {
+   command_name   check_postgres_watcher
+   command_line   /usr/local/nagios/libexec/check_postgres.pl watcher
+}
+
+

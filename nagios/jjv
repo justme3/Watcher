@@ -1,0 +1,17 @@
+#!/bin/bash
+
+###set -x 
+
+for IP in 208.65.147.106 208.65.147.96 208.65.149.96 208.81.64.96 208.81.65.96 208.81.66.96 208.81.67.96 208.81.68.96 208.81.69.96
+do
+	echo ${IP}
+	###sudo ssh ${IP} uname -a
+	###sudo scp ./checkcommands.add ${IP}:/tmp
+	sudo ssh ${IP} rm /tmp/checkcommands.add
+	sudo ssh ${IP} rm /tmp/services.add
+	###sudo scp ./services.add ${IP}:/tmp
+	###sudo ssh ${IP} /bin/ls -l /usr/local/nagios/libexec/check_watcher_lastrun.pl /usr/local/nagios/libexec/check_postgres.pl /usr/local/nagios/etc/checkcommands.cfg /usr/local/nagios/etc/services.cfg
+done
+
+exit 0
+

@@ -1,0 +1,34 @@
+### Check for watcher tables last run ###
+define service {
+   use            generic-service
+   host_name         p01c06i001
+   service_description     watcher_lastrun
+   check_period         24x7
+   max_check_attempts      2
+   normal_check_interval      15
+   retry_check_interval    5
+   contact_groups       primary
+   notification_interval      30
+   notification_period     24x7
+   notification_options    c
+   servicegroups        watcher_group
+   check_command        check_watcher_lastrun
+}
+
+### Check for watcher database ###
+define service {
+   use            generic-service
+   host_name         p01c06i001
+   service_description     postgres_watcher
+   check_period         24x7
+   max_check_attempts      2
+   normal_check_interval      15
+   retry_check_interval    5
+   contact_groups       primary
+   notification_interval      30
+   notification_period     24x7
+   notification_options    c
+   servicegroups        watcher_group
+   check_command        check_postgres_watcher
+}
+

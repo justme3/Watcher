@@ -1,0 +1,6 @@
+Here are two Mail Client libs from CPAN.
+
+http://search.cpan.org/~markov/Mail-IMAPClient-3.13/lib/Mail/IMAPClient.pod
+http://search.cpan.org/~sdowd/Mail-POP3Client-2.18/POP3Client.pm
+
+See dependancy / usage pages in the above documentation.

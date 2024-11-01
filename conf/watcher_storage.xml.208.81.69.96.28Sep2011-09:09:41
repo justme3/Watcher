@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<configuration>
+	<bluearc>
+		<array smu_ip="10.18.18.10" user="supervisor" password="or3g0n" name="MX-18"></array>
+	</bluearc>
+</configuration>

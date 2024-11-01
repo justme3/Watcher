@@ -1,0 +1,5 @@
+server=mail.johnster.com
+user=john@johnster.com
+passed=Br4ndN3wB4g
+port=993
+authmechanism=LOGIN

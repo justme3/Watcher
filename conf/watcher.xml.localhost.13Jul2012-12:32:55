@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<watcher>
+	<DBpull>
+		<table	site="US1"	ip="208.65.147.96"	table="arc_server">		</table>
+		<table	site="US1"	ip="208.65.147.96"	table="arc_cid">			</table>
+		<table	site="US1"	ip="208.65.147.96"	table="arc_mailsource">	</table>
+		<table	site="US1"	ip="208.65.147.96"	table="arc_storage">		</table>
+		<table	site="US1"	ip="208.65.147.96"	table="arc_lastrun">		</table>
+
+		<table	site="US2"	ip="208.65.147.106"	table="arc_server">		</table>
+		<table	site="US2"	ip="208.65.147.106"	table="arc_cid">			</table>
+		<table	site="US2"	ip="208.65.147.106"	table="arc_mailsource">	</table>
+		<table	site="US2"	ip="208.65.147.106"	table="arc_storage">		</table>
+		<table	site="US2"	ip="208.65.147.106"	table="arc_lastrun">		</table>
+
+		<table	site="EMEA"	ip="208.81.64.96"		table="arc_server">		</table>
+		<table	site="EMEA"	ip="208.81.64.96"		table="arc_cid">			</table>
+		<table	site="EMEA"	ip="208.81.64.96"		table="arc_mailsource">	</table>
+		<table	site="EMEA"	ip="208.81.64.96"		table="arc_storage">		</table>
+		<table	site="EMEA"	ip="208.81.64.96"		table="arc_lastrun">		</table>
+
+		<table	site="ANZ"	ip="208.81.66.96"		table="arc_server">		</table>
+		<table	site="ANZ"	ip="208.81.66.96"		table="arc_cid">			</table>
+		<table	site="ANZ"	ip="208.81.66.96"		table="arc_mailsource">	</table>
+		<table	site="ANZ"	ip="208.81.66.96"		table="arc_storage">		</table>
+		<table	site="ANZ"	ip="208.81.66.96"		table="arc_lastrun">		</table>
+
+		<table	site="DEN"	ip="208.65.149.96"	table="ba_storage">		</table>
+		<table	site="DEN"	ip="208.65.149.96"	table="ba_lastrun">		</table>
+		<table	site="ENG"	ip="208.65.147.96"	table="ba_storage">		</table>
+		<table	site="ENG"	ip="208.65.147.96"	table="ba_lastrun">		</table>
+		<table	site="AMS"	ip="208.81.64.96"		table="ba_storage">		</table>
+		<table	site="AMS"	ip="208.81.64.96"		table="ba_lastrun">		</table>
+		<table	site="LON"	ip="208.81.68.96"		table="ba_storage">		</table>
+		<table	site="LON"	ip="208.81.68.96"		table="ba_lastrun">		</table>
+		<table	site="TKO"	ip="208.81.65.96"		table="ba_storage">		</table>
+		<table	site="TKO"	ip="208.81.65.96"		table="ba_lastrun">		</table>
+		<table	site="HK"	ip="208.81.69.96"		table="ba_storage">		</table>
+		<table	site="HK"	ip="208.81.69.96"		table="ba_lastrun">		</table>
+		<table	site="SYN"	ip="208.81.66.96"		table="ba_storage">		</table>
+		<table	site="SYN"	ip="208.81.66.96"		table="ba_lastrun">		</table>
+		<table	site="AUK"	ip="208.81.67.96"		table="ba_storage">		</table>
+		<table	site="AUK"	ip="208.81.67.96"		table="ba_lastrun">		</table>
+
+		<table	site="EMEA"	ip="208.81.68.96"		table="sla_tesla">		</table>
+		<table	site="EMEA"	ip="208.81.68.96"		table="sla_lastrun">		</table>
+		<table	site="APAC"	ip="208.81.65.96"		table="sla_tesla">		</table>
+		<table	site="APAC"	ip="208.81.65.96"		table="sla_lastrun">		</table>
+		<table	site="ANZ"	ip="208.81.66.96"		table="sla_tesla">		</table>
+		<table	site="ANZ"	ip="208.81.66.96"		table="sla_lastrun">		</table>
+		<table	site="NZ"	ip="208.81.67.96"		table="sla_tesla">		</table>
+		<table	site="NZ"	ip="208.81.67.96"		table="sla_lastrun">		</table>
+		<table	site="US1"	ip="208.65.147.96"	table="sla_tesla">		</table>
+		<table	site="US1"	ip="208.65.147.96"	table="sla_lastrun">		</table>
+		<table	site="US2"	ip="208.65.147.106"	table="sla_tesla">		</table>
+		<table	site="US2"	ip="208.65.147.106"	table="sla_lastrun">		</table>
+	</DBpull>
+
+	<graph>
+		<module	name="arc">				</module>
+		<module	name="sla">				</module>
+		<module	name="storage">		</module>
+	</graph>
+
+	<arc>
+		<pair		site="US1">		</pair>
+		<pair		site="US2">		</pair>
+	</arc>
+
+</watcher>
+

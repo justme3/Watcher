@@ -1,0 +1,5 @@
+<configuration>
+	<watcher_archive>
+		<pair ip="10.18.11.1"></pair>
+	</watcher_archive>
+</configuration>

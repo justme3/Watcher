@@ -1,0 +1,229 @@
+#!/bin/bash
+
+set -x
+
+/usr/bin/initdb -D /home/data -E UNICODE --lc-collate=C --lc-ctype=C -U postgres 
+
+ln -s /var/lib/pgsql/data /home/data
+
+/etc/init.d/postgresql start
+
+/usr/bin/createdb -T template1 -E UNICODE -h localhost -U postgres watcher
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table arc_cid ( 
+
+epochtime timestamp with time zone not null,
+cid int8 not null,
+solrcnt1 int8 not null,
+solrcnt2 int8 not null,
+cstnam text not null,
+solrlabel text not null,
+solrseg1 int8 not null,
+solrseg2 int8 not null,
+solrej1 int8 not null,
+solrej2 int8 not null,
+sizemb1 int8 not null,
+sizemb2 int8 not null,
+masrej int8 not null,
+mscnt int8 not null,
+usrcnt int8 not null,
+solrndxbklg int8 not null,
+solrseqnum int8 not null,
+ndx24 int8 not null,
+ingest24 int8 not null,
+
+primary key (epochtime,cid))"
+
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table arc_mailsource ( 
+
+ms_epochtime timestamp with time zone not null,
+cid int8 not null,
+sid int8 not null,
+cstnam text not null,
+ms_status int8 not null,
+ms_host text not null,
+ms_user text not null,
+ms_port int not null,
+ms_type text not null,
+ms_name text not null,
+ms_desc text not null,
+ms_backlog int8 not null,
+
+primary key (ms_epochtime,cid,sid))"
+
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table arc_server ( 
+
+epochtime timestamp with time zone not null,
+srv_ip inet not null,
+srv_type char(4) not null,
+datacenter text not null,
+DNScnt int8 not null,
+dircnt int8 not null,
+diskfree int8 not null,
+
+primary key (epochtime,srv_ip))"
+
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table arc_storage ( 
+
+epochtime timestamp with time zone not null, 
+ip inet not null, 
+mp text not null, 
+nfsused int8 not null, 
+nfsfree int8 not null, 
+
+primary key (epochtime, ip, mp))"
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table arc_lastrun ( 
+
+epochtime timestamp with time zone not null, 
+
+primary key (epochtime))"
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table arc_ms_lastrun ( 
+
+epochtime timestamp with time zone not null, 
+thread int8 not null, 
+
+primary key (epochtime))"
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table arc_cid_lastrun ( 
+
+epochtime timestamp with time zone not null, 
+thread int8 not null, 
+
+primary key (epochtime))"
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table arc_server_lastrun ( 
+
+epochtime timestamp with time zone not null, 
+thread int8 not null, 
+
+primary key (epochtime))"
+
+
+
+
+
+ALTER TABLE arc_cid ALTER COLUMN solrseg1 TYPE bigint;
+ALTER TABLE arc_cid ALTER COLUMN solrseg2 TYPE bigint;
+
+ALTER TABLE arc_cid ADD COLUMN ingest24 bigint NOT NULL DEFAULT 0;
+
+ALTER TABLE arc_mailsource ADD COLUMN ms_ingest24 bigint NOT NULL DEFAULT 0;
+
+ALTER TABLE arc_cid rename COLUMN solrseg to solrseg1 ;
+ALTER TABLE arc_cid ADD COLUMN solrseg2 bigint NOT NULL DEFAULT 0;
+ALTER TABLE arc_cid rename COLUMN sizemb to sizemb1 ;
+ALTER TABLE arc_cid ADD COLUMN sizemb2 bigint NOT NULL DEFAULT 0;
+ALTER TABLE arc_cid rename COLUMN solrcnt to solrcnt1 ;
+ALTER TABLE arc_cid ADD COLUMN solrcnt2 bigint NOT NULL DEFAULT 0;
+ALTER TABLE arc_cid rename COLUMN solrej to solrej1 ;
+ALTER TABLE arc_cid ADD COLUMN solrej2 bigint NOT NULL DEFAULT 0;
+ALTER TABLE arc_cid ADD COLUMN severe1 bigint NOT NULL DEFAULT 0;
+ALTER TABLE arc_cid ADD COLUMN severe2 bigint NOT NULL DEFAULT 0;
+ALTER TABLE arc_cid ADD COLUMN spurge bigint NOT NULL DEFAULT 0;
+ALTER TABLE arc_cid ADD COLUMN rpurge bigint NOT NULL DEFAULT 0;
+ALTER TABLE arc_cid ADD COLUMN solrips inet[] NOT NULL DEFAULT '{0.0.0.0}';
+
+
+
+
+alter TABLE arc_cid add COLUMN severe bigint[];
+alter table arc_cid alter COLUMN severe set data type bigint[] using array[severe1,severe2];
+alter table arc_cid drop column severe1;
+alter table arc_cid drop column severe2;
+
+alter TABLE arc_cid add COLUMN solrej bigint[];
+alter table arc_cid alter COLUMN solrej set data type bigint[] using array[solrej1,solrej2];
+alter table arc_cid drop column solrej1;
+alter table arc_cid drop column solrej2;
+
+alter TABLE arc_cid add COLUMN solrcnt bigint[];
+alter table arc_cid alter COLUMN solrcnt set data type bigint[] using array[solrcnt1,solrcnt2];
+alter table arc_cid drop column solrcnt1;
+alter table arc_cid drop column solrcnt2;
+
+alter TABLE arc_cid add COLUMN sizemb bigint[];
+alter table arc_cid alter COLUMN sizemb set data type bigint[] using array[sizemb1,sizemb1];
+alter table arc_cid drop column sizemb1;
+alter table arc_cid drop column sizemb2;
+
+alter TABLE arc_cid add COLUMN solrseg bigint[];
+alter table arc_cid alter COLUMN solrseg set data type bigint[] using array[solrseg1,solrseg2];
+alter table arc_cid drop column solrseg1;
+alter table arc_cid drop column solrseg2;
+
+alter TABLE arc_cid alter COLUMN severe set default '{0}';
+alter TABLE arc_cid alter COLUMN solrej set default '{0}';
+alter TABLE arc_cid alter COLUMN solrcnt set default '{0}';
+alter TABLE arc_cid alter COLUMN solrips set default '{0.0.0.0}';
+alter TABLE arc_cid alter COLUMN sizemb set default '{0}';
+alter TABLE arc_cid alter COLUMN solrseg set default '{0}';
+
+alter TABLE arc_cid alter COLUMN severe set not null;
+alter TABLE arc_cid alter COLUMN solrej set not null;
+alter TABLE arc_cid alter COLUMN solrcnt set not null;
+alter TABLE arc_cid alter COLUMN solrips set not null;
+alter TABLE arc_cid alter COLUMN sizemb set not null;
+alter TABLE arc_cid alter COLUMN solrseg set not null;
+
+
+###alter TABLE arc_cid alter COLUMN sizemb SET Data Type bigint[] using array[sizemb1,sizemb1];
+###alter TABLE arc_cid alter COLUMN sizemb2 drop DEFAULT;
+###alter TABLE arc_cid alter COLUMN sizemb2 SET Data Type bigint[] using array[sizemb2];
+###alter TABLE arc_cid alter COLUMN solrseg1 SET Data Type bigint[] using array[solrseg1];
+###alter TABLE arc_cid alter COLUMN solrseg2 drop DEFAULT;
+###alter TABLE arc_cid alter COLUMN solrseg2 SET Data Type bigint[] using array[solrseg2];
+###alter TABLE arc_cid alter COLUMN sizemb1 set default '{0}';
+###alter TABLE arc_cid alter COLUMN sizemb2 set default '{0}';
+###alter TABLE arc_cid alter COLUMN solrseg1 set default '{0}';
+###alter TABLE arc_cid alter COLUMN solrseg2 set default '{0}';
+
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table arc_cid ( 
+
+epochtime timestamp with time zone not null,
+cid int8 not null,
+cstnam text not null,
+solrlabel text not null,
+masrej int8 not null,
+mscnt int8 not null,
+usrcnt int8 not null,
+solrndxbklg int8 not null,
+solrseqnum int8 not null,
+ndx24 int8 not null,
+ingest24 int8 not null,
+spurge int8 not null,
+rpurge int8 not null,
+solrips inet[] not null default '{0.0.0.0}',
+severe bigint[] not null default '{0}',
+solrej bigint[] not null default '{0}',
+solrcnt bigint[] not null default '{0}',
+sizemb bigint[] not null default '{0}',
+solrseg bigint[] not null default '{0}',
+
+primary key (epochtime,cid))"
+
+ALTER TABLE arc_cid RENAME COLUMN solrseg TO solrindexcnt;
+
+ALTER TABLE arc_cid ADD COLUMN solrseg bigint[] NOT NULL DEFAULT '{0}';
+
+
+alter table arc_cid drop column solrlabel;
+alter table arc_cid drop column groupid;
+
+ALTER TABLE arc_cid ADD COLUMN fgroupid bigint NOT NULL DEFAULT 0;
+alter TABLE arc_cid add COLUMN groupid bigint[] not null default '{0}';
+

@@ -1,0 +1,26 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+use Data::Dumper;
+
+my @masips = ();
+my @solrips = ();
+
+open(MAS,"/root/dist/archiving_mas") || die "Cannot open /root/dist/archiving_mas: $!";
+
+@masips = <MAS>;
+
+close(MAS);
+
+open(SOLR,"/root/dist/archiving_solr") || die "Cannot open /root/dist/archiving_solr: $!";
+
+@solrips = <SOLR>;
+
+close(SOLR);
+
+foreach my $ip (@masips)
+{
+	print Dumper $ip;
+}
+

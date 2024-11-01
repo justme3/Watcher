@@ -1,0 +1,20 @@
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table sla_tesla ( 
+
+epochtime timestamp with time zone not null,
+DNSlabel text not null,
+polls int not null,
+successes int not null,
+latency numeric not null,
+
+primary key (epochtime,DNSlabel))"
+
+
+
+/usr/bin/psql -h localhost -U postgres watcher -c "create table sla_lastrun ( 
+
+epochtime timestamp with time zone not null, 
+
+primary key (epochtime))"
+
+

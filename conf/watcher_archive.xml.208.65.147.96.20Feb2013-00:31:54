@@ -1,0 +1,15 @@
+<configuration>
+
+	<watcher_archive>
+		<pair ip="10.1.107.1"></pair>
+		<pair ip="10.2.106.1"></pair>
+		<pair ip="10.2.107.1"></pair>
+	</watcher_archive>
+
+	<processes> 
+		<MS  number="1"></MS>
+		<SRV number="1"></SRV>
+		<CID number="2"></CID>
+	</processes>
+
+</configuration>

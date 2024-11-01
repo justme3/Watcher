@@ -1,0 +1,25 @@
+#!/bin/bash
+
+###set -x
+
+if [ -z "${1}" ]
+then
+	echo "ERROR: you must specify a script to push out. Exiting."
+	exit 1
+fi
+
+if [ ! -f /home/watcher/scripts/${1} ]
+then
+	echo "ERROR: Script /home/watcher/scripts/${1} does not exist. Exiting."
+	exit 2
+fi
+
+for IP in 208.65.147.96 208.65.149.96 208.81.64.96 208.81.68.96 208.81.69.96 208.81.65.96 208.81.66.96 208.81.67.96 208.65.147.106 208.65.147.106
+do
+	scp /home/watcher/scripts/${1} ${IP}:/usr/local/bin/opsadmin/watcher/${1}
+	ssh ${IP} chown root:root /usr/local/bin/opsadmin/watcher/${1}
+	ssh ${IP} chmod 0755 /usr/local/bin/opsadmin/watcher/${1}
+done
+
+exit 0
+

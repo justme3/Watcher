@@ -1,0 +1,66 @@
+=head2 Mon Jan  8 13:36:14 2007: C<Module> L<URI::imap|URI::imap>
+
+=over 4
+
+=item *
+
+C<installed into: /home/jeckhardt/lib/perl/site_perl>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.01>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Jan  8 13:42:00 2007: C<Module> L<IMAP::Client|IMAP::Client>
+
+=over 4
+
+=item *
+
+C<installed into: /home/jeckhardt/lib/perl/site_perl>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.13>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Jan  8 13:47:22 2007: C<Module> L<Net::IMAP::Simple|Net::IMAP::Simple>
+
+=over 4
+
+=item *
+
+C<installed into: /home/jeckhardt/lib/perl/site_perl>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.14>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+

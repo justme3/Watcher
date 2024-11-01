@@ -1,0 +1,36 @@
+#!/bin/bash
+
+###set -x
+
+export PGPASSWORD=dbG0d
+
+echo "    CID       Archiving          Name"
+echo ""
+
+for cid in `cat ./jjv`
+do 
+	name=`/usr/bin/psql -At -h 10.1.106.130 -U postgres mxl -c "select name from mxl_customer where customer_id=${cid}"`
+
+	if [ "${name}" = "" ]
+	then
+		name="Not in policy DB"
+	fi
+
+	arc=`/usr/bin/psql -At -h 10.1.106.130 -U postgres mxl -c "select scope from arc_product_settings where id=${cid}"`
+
+	if [ "${arc}" = "" ]
+	then
+		arc="No archiving"
+	else
+		arc="Defined     "
+	fi
+
+	echo "$cid     $arc     $name"
+	echo ""
+	
+done
+
+echo ""
+
+exit 0
+
