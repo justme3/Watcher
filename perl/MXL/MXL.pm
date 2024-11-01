@@ -4,7 +4,7 @@ package MXL;
 use DBI;
 use XML::Simple;
 
-our $AUTHOR	= 'jeckhardt@mxlogic.com';
+our $AUTHOR	= 'jvossler@mxlogic.com';
 our $VERSION	= 0.1;
 our $PODCONFIG	= '/mxl/etc/pod_config.xml';
 
